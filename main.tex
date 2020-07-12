@@ -49,6 +49,15 @@
 \def\pgfsysdriver{pgfsys-dvipdfmx.def} % put before tikz
 \usepackage{tikz}
 
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+    citecolor = blue
+}
+
 %原文照排
 \usepackage{verbatim}
 
@@ -127,7 +136,9 @@ Course Name, Autumn 2017 \\[25pt]}}
 \thispagestyle{empty}
 \end{titlepage}
 
+{\hypersetup{linkcolor=black}
 \tableofcontents
+}
 \thispagestyle{empty}
 
 \newpage
