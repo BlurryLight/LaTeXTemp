@@ -3,24 +3,16 @@
 \usepackage{placeins}
 \usepackage{listings}
 \usepackage{sourcecodepro}
-%\usepackage{fontspec,xltxtra,xunicode}
-%\usepackage{times}
-
+\usepackage{fontspec,xltxtra,xunicode}
+\usepackage{mathptmx}
 %----------
 % 定义中文环境
 %----------
-
 \usepackage{xeCJK}
-
-% \setCJKmainfont[BoldFont={SimHei},ItalicFont={KaiTi}]{SimSun}
-% \setCJKsansfont{SimHei}
-% \setCJKfamilyfont{zhsong}{SimSun}
-% \setCJKfamilyfont{zhhei}{SimHei}
-
-% \newcommand*{\songti}{\CJKfamily{zhsong}} % 宋体
-% \newcommand*{\heiti}{\CJKfamily{zhhei}}   % 黑体
-
-
+% \setCJKmainfont[BoldFont=FandolSong-Bold.otf]{FandolSong-Regular.otf}
+% \setCJKsansfont[BoldFont=FandolHei-Bold.otf]{FandolHei-Regular.otf}
+% \setCJKmonofont{FandolFang-Regular.otf}
+% \newCJKfontfamily\kaiti{FandolKai-Regular.otf}
 %----------
 % 版面设置
 %----------
@@ -191,6 +183,7 @@ Course Name, Autumn 2017 \\[25pt]}}
 
 引言也称前言、序言或概述，作为科技论文的开端，提出文中要研究的问题，引导读者阅读和理解全文。
 
+Also make sure that PDF or EPS files you include as images include all their fonts by themselves. This can be an issue if you generate these PDF or EPS images from e.g. M\$ Office like Visio, because they use most definitive different fonts. AFAIK LaTeX can not include this missing fonts because they are not part of the main document but of the embedded object (image). The only solution here is to embed the fonts to them first, either by re-generate them with the correct settings in the software you use for this (e.g. PDF printer) or by running the ps2pdf14 command you mentioned on the images beforehand not the final document.
 
 \section{模型}
 正文是指著作的本文，有规范格式和生效标志的正式文本。
