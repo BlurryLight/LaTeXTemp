@@ -1,5 +1,8 @@
 \documentclass[12pt]{article} % 12pt 为字号大小 UTF8
 \usepackage{amssymb,amsfonts,amsmath,amsthm}
+\usepackage{placeins}
+\usepackage{listings}
+\usepackage{sourcecodepro}
 %\usepackage{fontspec,xltxtra,xunicode}
 %\usepackage{times}
 
@@ -42,12 +45,13 @@
 % 其他宏包
 %----------
 %图形相关
-\usepackage[x11names]{xcolor} % must before tikz, x11names defines RoyalBlue3
+\usepackage{xcolor} % must before tikz, x11names defines RoyalBlue3
 \usepackage{graphicx}
 \usepackage{pstricks,pst-plot,pst-eps}
-\usepackage{subfig}
+\usepackage{subcaption}
 \def\pgfsysdriver{pgfsys-dvipdfmx.def} % put before tikz
 \usepackage{tikz}
+\usepackage{float}
 
 \usepackage{hyperref}
 \hypersetup{
@@ -100,6 +104,7 @@
 \renewcommand{\contentsname}{目录}
 \renewcommand{\tablename}{表}
 \renewcommand{\figurename}{图}
+\renewcommand{\lstlistingname}{代码} 
 
 \setlength{\parskip}{0.4ex} % 段落间距
 
@@ -108,7 +113,44 @@
 \setitemize[1]{itemsep=0.4ex,partopsep=0.4ex,parsep=\parskip,topsep=0.4ex}
 \setdescription{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
 
+%New colors defined below
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{codeblue}{rgb}{.2,.2,.7}
 
+%Code listing style named "mystyle"
+
+% ! indicates that some restrictions should be ignored (discussed later)
+% h indicates that the float is allowed to be placed inline
+% t indicates that the float is allowed to go into a top area
+% b indicates that the float is allowed to go into a bottom area
+% p indicates the the float is allowed to go on a float page or column area
+
+\lstdefinestyle{mystyle}{
+  float,
+  floatplacement=htb,
+  backgroundcolor=\color{backcolour},   commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codeblue},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2
+}
+
+%"mystyle" code listing set
+\lstset{style=mystyle}
+\newfloat{Code}{H}{myc}
 %==========
 % 正文部分
 %==========
@@ -201,7 +243,78 @@ Course Name, Autumn 2017 \\[25pt]}}
 \caption{这是一个图}
 \label{fig:fig1}
 \end{figure}
-引用图\ref{fig:fig1} 。
+引用\ref{fig:fig1};
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=1\linewidth]{NewTux.pdf}
+\caption{把SVG转成pdf}
+\label{fig:fig2}
+\end{figure}
+
+\begin{figure}[!htb]
+  \centering
+  \begin{subfigure}[t]{0.24\linewidth}
+      \begin{minipage}[b]{1\linewidth}
+      \includegraphics[width=1\linewidth]{mesh.png}
+      \caption{a}
+      \end{minipage}
+  \end{subfigure}
+  \begin{subfigure}[t]{0.24\linewidth}
+      \begin{minipage}[b]{1\linewidth}
+      \includegraphics[width=1\linewidth]{mesh.png}
+      \caption{b}
+      \end{minipage}
+  \end{subfigure}
+  \begin{subfigure}[t]{0.24\linewidth}
+      \begin{minipage}[b]{1\linewidth}
+      \includegraphics[width=1\linewidth]{mesh.png}
+      \caption{c}
+      \end{minipage}
+  \end{subfigure}
+  \begin{subfigure}[t]{0.24\linewidth}
+      \begin{minipage}[b]{1\linewidth}
+      \includegraphics[width=1\linewidth]{mesh.png}
+      \caption{d}
+      \end{minipage}
+  \end{subfigure}
+  \caption{横排布局示例}
+  \label{F.csu_row}
+\end{figure}
+
+\begin{figure}[!htb]
+  \begin{subfigure}{.49\textwidth}
+    \centering
+    % include first image
+    \includegraphics[width=.8\linewidth]{mesh.png}  
+    \caption{Put your sub-caption here}
+    \label{fig:sub-first}
+  \end{subfigure}
+  \begin{subfigure}{.49\textwidth}
+    \centering
+    % include second image
+    \includegraphics[width=.8\linewidth]{mesh.png}  
+    \caption{Put your sub-caption here}
+    \label{fig:sub-second}
+  \end{subfigure}
+  \newline
+  \begin{subfigure}{.49\textwidth}
+    \centering
+    % include third image
+    \includegraphics[width=.8\linewidth]{mesh.png}  
+    \caption{Put your sub-caption here}
+    \label{fig:sub-third}
+  \end{subfigure}
+  \begin{subfigure}{.49\textwidth}
+    \centering
+    % include fourth image
+    \includegraphics[width=.8\linewidth]{mesh.png}  
+    \caption{Put your sub-caption here}
+    \label{fig:sub-fourth}
+  \end{subfigure}
+  \caption{Put your caption here}
+  \label{fig:complex}
+  \end{figure}
 
 \subsection{表}
 \begin{table}[ht]
@@ -220,6 +333,54 @@ Course Name, Autumn 2017 \\[25pt]}}
 \end{table}
 引用表格\ref{tb:filter} 。
 
+代码排版如下。
+\begin{Code}
+
+\begin{lstlisting}[language=C++, caption=Cpp example]
+  #include <iostream>
+  int main()
+  {
+    std::cout<<"Hello World"!<<std::endl;
+    return 0;
+  }
+\end{lstlisting}
+\end{Code}
+\begin{Code}
+  
+\begin{lstlisting}[language=Python, caption=Python example]
+  import numpy as np
+      
+  def incmatrix(genl1,genl2):
+      m = len(genl1)
+      n = len(genl2)
+      M = None #to become the incidence matrix
+      VT = np.zeros((n*m,1), int)  #dummy variable
+      
+      #compute the bitwise xor matrix
+      M1 = bitxormatrix(genl1)
+      M2 = np.triu(bitxormatrix(genl2),1) 
+  
+      for i in range(m-1):
+          for j in range(i+1, m):
+              [r,c] = np.where(M2 == M1[i,j])
+              for k in range(len(r)):
+                  VT[(i)*n + r[k]] = 1;
+                  VT[(i)*n + c[k]] = 1;
+                  VT[(j)*n + r[k]] = 1;
+                  VT[(j)*n + c[k]] = 1;
+                  
+                  if M is None:
+                      M = np.copy(VT)
+                  else:
+                      M = np.concatenate((M, VT), 1)
+                  
+                  VT = np.zeros((n*m,1), int)
+      
+      return M
+  \end{lstlisting}
+\end{Code}
+
+\FloatBarrier % 保持所有图片在barrier前面
 \section{总结}
 这里总结全文。
 
